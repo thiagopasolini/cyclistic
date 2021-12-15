@@ -1,8 +1,10 @@
 ---
 title: "Cyclistic Case Study"
 author: "Thiago"
-date: "10/12/2021"
-output: html_document
+date: "15/12/2021"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +21,7 @@ I'm a junior data analyst, working in the marketing analytics team at Cyclistic,
 
 ### 1.2 - The Company
 
-![](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i1_logo.png)
+![](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i01_logo.png)
 
 **Business Model**
 
