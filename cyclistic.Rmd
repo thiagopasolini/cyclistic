@@ -1,0 +1,930 @@
+---
+title: "Cyclistic Case Study"
+author: "Thiago"
+date: "10/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1 - Introduction
+
+This is a Capstone Project for the Google Data Analytics Professional Certification.
+
+### 1.1 - The Scenario
+
+I'm a junior data analyst, working in the marketing analytics team at Cyclistic, a *fictional* bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. My task for this project is to understand **how casual riders and annual members use Cyclistic bikes differently** and **design a new marketing strategy to convert casual riders into annual members**. But before that, executives must approve the recommendations, with well structured and compelling data insights and visualizations.
+
+### 1.2 - The Company
+
+![](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i1_logo.png)
+
+**Business Model**
+
+Since 2016, Cyclistic is a bike-sharing geotracked company across Chicago. 
+
+Costumer types:
+
+* Casual Rider, that purchase **single-ride** or **full-day** passes; and 
+* Annual Member, that purchase an **annual** subscription. 
+
+The bikes can be unlocked from one station and returned to any other station in the system anytime.
+
+Bicycle variety:
+
+* Classic;
+* Electric; and
+* Docked.
+
+Cyclistic sets itself apart by also offering reclining bikes, hand tricycles, and cargo bikes, making bike-share more inclusive to people with disabilities and riders who can’t use a standard two-wheeled bike.
+
+**Stakeholders**
+
+* Cyclistic marketing analytics team: responsible for collecting, analyzing, and reporting data that helps guide Cyclistic marketing strategy;
+
+* Lily Moreno: The director of marketing, is responsible for the development of campaigns and initiatives to promote the bike-share program; and
+
+* Cyclistic executive team: The notoriously detail-oriented executive team will decide whether to approve the recommended marketing program.
+
+**Facts and Numbers**
+
+* 5,824 bikes; 
+* 692 docking stations;
+* More than 50% of riders select traditional bikes;
+* 8% of riders opt for the assistive bike options;
+* 30% of users bike to commute to work each day;
+* Users are more likely to ride for leisure; and
+* Casual riders have chosen Cyclistic for their mobility need.
+
+**Competitive advantages**
+
+* Bicycle variety; 
+* Pricing flexibility; and
+* Adaptive tools to people with disabilities and riders who can’t use a standard two-wheeled bike.
+
+### 1.3 - The Problem
+
+Cyclistic’s finance analysts have concluded that **annual members are much more profitable than casual riders**. Although the **pricing flexibility helps Cyclistic attract more customers**, Moreno believes that maximizing the number of annual members will be key to future growth.
+
+Moreno has set a clear goal: **Design marketing strategies aimed at converting casual riders into annual members**. In order to do that, however, the marketing analyst team needs to better understand:
+
+* how annual members and casual riders differ; 
+* why casual riders would buy a membership; and 
+* how digital media could affect their marketing tactics. 
+
+# 1.4 - Scope of work
+
+### 2 - Ask
+A clear statement of the business task
+
+### 3 - Prepare
+A description of all data sources used
+
+### 4 - Process
+Documentation of any cleaning or manipulation of data
+
+### 5 - Analyze
+A summary of your analysis
+
+### 6 - Share
+Supporting visualizations and key findings
+
+### 7 - Act
+Top three recommendations based on the analysis
+
+
+# 2 - Ask
+* A clear statement of the business task
+
+Me and my team will use the six steps of the analysis process (Ask, Prepare, Process, Analyze, Share and Act) to analyze the twelve previous months of Cyclistic historical bike trip data and guide my analysis of the databases to answer the three questions related in "The Problem" above. After that, we will be able to know if the goal of the director of marketing is tangible and (if it is) how is the best way to accomplish that, with recommendations based on the study findings and present to the executive team.
+
+
+# 3 - Prepare
+* A description of all data sources used
+
+The data are stored at <https://divvy-tripdata.s3.amazonaws.com/index.html> and organized by month. Since there is no filter, or previous calculating in the raw data and all the consumer are included, we concluded that there is no issues with bias or credibility in the data. To ensure that, we used the ROCCC system:
+
+R - Reliability: 
+
+* Missing values represents 3.58% from the total and it's smaller than 10% of statistical significance. So, it's ok.
+
+* 0,03% from the total of registries that haves datetimes starting before start datetimes. In this specific cases we can't fix it, the percentile is to small so the data will be disregarded and will be ok
+
+* There is to much primary keys and with this problem will be more difficult to clean and work with the data, so we can solve it just by filtering variables according to the actual step.
+
+O - Originality: 
+
+* The data is original, just with a different name because Cyclistic is a fictional company.
+
+C - Comprehensiveness: 
+
+* This database is comprehensive enough.
+
+C - Current: 
+
+* The database are up to date and updated monthly
+
+C - Cited: 
+
+The data is sourced by a first-party group (Motivate International Inc.), under this license <https://www.divvybikes.com/data-license-agreement>.
+
+
+# 4 - Process
+* Documentation of any cleaning or manipulation of data
+
+All this step will be completed in RStudio, this tool is powerful for handling large amounts of data. To maintain the data integrity all the data will be merged and loaded.
+
+## 4.1 - Loading packages
+
+```{r include=FALSE}
+library(readr)
+library(tidyverse)
+library(lubridate)
+```
+
+## 4.2 - Merging the database
+
+```{r}
+raw_data_2020_11 <- read_csv("data/raw/202011-divvy-tripdata.csv")
+raw_data_2020_12 <- read_csv("data/raw/202012-divvy-tripdata.csv")
+raw_data_2021_01 <- read_csv("data/raw/202101-divvy-tripdata.csv")
+raw_data_2021_02 <- read_csv("data/raw/202102-divvy-tripdata.csv")
+raw_data_2021_03 <- read_csv("data/raw/202103-divvy-tripdata.csv")
+raw_data_2021_04 <- read_csv("data/raw/202104-divvy-tripdata.csv")
+raw_data_2021_05 <- read_csv("data/raw/202105-divvy-tripdata.csv")
+raw_data_2021_06 <- read_csv("data/raw/202106-divvy-tripdata.csv")
+raw_data_2021_07 <- read_csv("data/raw/202107-divvy-tripdata.csv")
+raw_data_2021_08 <- read_csv("data/raw/202108-divvy-tripdata.csv")
+raw_data_2021_09 <- read_csv("data/raw/202109-divvy-tripdata.csv")
+raw_data_2021_10 <- read_csv("data/raw/202110-divvy-tripdata.csv")
+
+data1_merged <- rbind(
+  raw_data_2020_11,
+  raw_data_2020_12,
+  raw_data_2021_01,
+  raw_data_2021_02,
+  raw_data_2021_03,
+  raw_data_2021_04,
+  raw_data_2021_05,
+  raw_data_2021_06,
+  raw_data_2021_07,
+  raw_data_2021_08,
+  raw_data_2021_09,
+  raw_data_2021_10
+  )
+
+rm(list = c("raw_data_2020_11",
+            "raw_data_2020_12",
+            "raw_data_2021_01",
+            "raw_data_2021_02",
+            "raw_data_2021_03",
+            "raw_data_2021_04",
+            "raw_data_2021_05",
+            "raw_data_2021_06",
+            "raw_data_2021_07",
+            "raw_data_2021_08",
+            "raw_data_2021_09",
+            "raw_data_2021_10"
+            ))
+
+save(data1_merged, file = "data/processed/data1_merged.RData")
+```
+
+## 4.3 - Pre-exploring and discovering percentile of missing values
+
+```{r}
+glimpse(data1_merged)
+```
+```{r}
+round(sum(is.na(data1_merged)) / 
+        (nrow(data1_merged) * ncol(data1_merged)), 
+      digits =  4) * 100
+```
+
+
+**NAs** variables percentile from total **3.58%**. It's smaller than 10% of adopted for the statistical significance level.
+
+## 4.4 - Adapting database for study
+
+### 4.4.1 - Filtering not relevant variables
+
+Variable "ride_id" it's not relevant for the study.
+```{r}
+data2_adapted <- select(data1_merged, 
+                       everything(), 
+                       - ride_id)
+```
+
+The variables: "start_station_id" and "end_station_id" can be the primary key for the variables "start_station_name" and "end_station_name".
+```{r}
+data2_adapted <- select(data2_adapted, 
+                       everything(), 
+                       - start_station_name,
+                       - end_station_name)
+```
+
+Latitude and longitude data must match with "start_station_id" and "end_station_id". So, at this time we will not use the following variables "start_lat", "start_lng", "end_lat", "end_lng". Later we will explore the map visualization, and then we will add this variables again.
+```{r}
+data2_adapted <- select(data2_adapted, 
+                       everything(),
+                       - start_lat,
+                       - start_lng,
+                       - end_lat,
+                       - end_lng)
+```
+
+### 4.4.2 - Adding relevant variables 
+
+According to the project's tasks
+```{r}
+ride_length <- data2_adapted$ended_at - data2_adapted$started_at
+
+day_of_week <- as.Date(data2_adapted$started_at)  
+day_of_week <- format(day_of_week,"%u")
+day_of_week <- as.numeric(day_of_week)
+day_of_week <- day_of_week + 1
+day_of_week <- replace(day_of_week, day_of_week == 8, 1)
+```
+
+Another variables, on my own
+```{r}
+hour <- hour(data2_adapted$started_at)
+
+month_number <- month(data2_adapted$started_at)
+```
+
+### 4.4.3 - Combining everything
+```{r}
+data2_adapted <- mutate(data2_adapted,
+                       ride_length,
+                       hour,
+                       day_of_week,
+                       month_number
+                       )
+
+```
+
+### 4.4.4 - Checking out and removing used data
+```{r}
+rm(list = c("ride_length",
+            "day_of_week",
+            "hour",
+            "month_number"
+            ))
+
+glimpse(data2_adapted)
+```
+
+## 4.4.5 - Cleaning
+
+## 4.4.5.1 - Identifying problems
+```{r}
+summary(data2_adapted)
+```
+```{r}
+min(data2_adapted$ride_length, na.rm = T)
+```
+
+The variable ride length must be bigger than zero.
+
+## 4.4.5.2 - Investigating the percentile from total
+```{r}
+round(nrow(filter(data2_adapted, 
+       ride_length <= 0)
+     ) / nrow(data2_adapted), digits = 4) * 100
+```
+Just 3% of the total observations from "ride_lenght" aren't bigger than zero
+
+## 4.4.5.3 - Fixing
+```{r}
+data3_cleaned <- mutate(data2_adapted,
+                       ride_length = replace(
+                         ride_length, ride_length <= 0, NA))
+```
+
+## 4.4.5.4 - Checking out the results and the NAs percentile
+```{r}
+min(data3_cleaned$ride_length, na.rm = T)
+```
+```{r}
+round(sum(is.na(data3_cleaned)) / 
+        (nrow(data3_cleaned) * ncol(data3_cleaned)), 
+      digits =  4) * 100
+```
+2.32% of the total observations are now missing values
+
+## 4.4.5.5 - Saving the process
+```{r}
+save(data3_cleaned, file = "data/processed/data2_cleaned.RData")
+```
+
+
+# 5 - Analyze
+* A summary of your analysis
+
+This step will be splitted into two studies:
+* Count Study; and
+* Ride Length Study.
+
+## 5.1 Count Study
+
+### 5.1.1 Using only variables to this study
+```{r}
+data4_filtered_1count <- select(data3_cleaned,
+                               rideable_type, 
+                               member_casual,
+                               hour,
+                               day_of_week,
+                               month_number)
+```
+
+
+Checking out
+```{r}
+head(data4_filtered_1count)
+```
+
+### 5.1.2 Exploring data by tables
+
+* Member and Casual Table
+```{r}
+table_count1_mc <- data4_filtered_1count %>% 
+  group_by(member_casual) %>% 
+  summarise(count = n())
+
+
+table_count1_mc
+```
+
+* Member and Casual by Hour Table
+```{r}
+table_count2_mc_hour <- data4_filtered_1count %>% 
+  group_by(member_casual, hour) %>% 
+  summarise(count = n())
+
+table_count2_mc_hour
+```
+
+* Member and Casual by Day Table
+```{r}
+table_count3_mc_day <- data4_filtered_1count %>% 
+  group_by(member_casual, day_of_week) %>% 
+  summarise(count = n())
+
+table_count3_mc_day
+```
+
+* Member and Casual by Month Table
+```{r}
+table_count4_mc_month <- data4_filtered_1count %>% 
+  group_by(member_casual, month_number) %>% 
+  summarise(count = n())
+
+table_count4_mc_month
+```
+
+* Member and Casual by Ride Type Table
+```{r}
+table_count5_mc_ride <- data4_filtered_1count %>% 
+  group_by(member_casual, rideable_type) %>% 
+  summarise(count = n())
+
+table_count5_mc_ride
+```
+
+## 5.2 Ride Length Study
+
+### 5.2.1 Using only variables to this study
+```{r}
+data4_filtered_2length <- select(data3_cleaned,
+                                rideable_type, 
+                                member_casual,
+                                hour,
+                                day_of_week,
+                                month_number,
+                                ride_length)
+```
+
+
+Checking out
+```{r}
+head(data4_filtered_2length)
+```
+
+### 5.2.2 Exploring data by tables
+
+* Member and Casual Table
+```{r}
+table_length1_mc <- data4_filtered_2length %>% 
+  group_by(member_casual) %>% 
+  summarise(mean = round(seconds_to_period(
+    mean(ride_length, na.rm = TRUE)), digits = 2),
+    min = seconds_to_period(min(ride_length, na.rm = TRUE)),
+    max = seconds_to_period(max(ride_length, na.rm = TRUE))
+    )
+
+table_length1_mc
+```
+
+* Member and Casual by Hour Table
+```{r}
+table_length2_mc_hour <- data4_filtered_2length %>% 
+  group_by(member_casual, hour) %>% 
+  summarise(mean = round(seconds_to_period(
+    mean(ride_length, na.rm = TRUE)), digits = 2),
+    min = seconds_to_period(min(ride_length, na.rm = TRUE)),
+    max = seconds_to_period(max(ride_length, na.rm = TRUE))
+    )
+
+table_length2_mc_hour
+```
+
+* Member and Casual by Day Table
+```{r}
+table_length3_mc_day <- data4_filtered_2length %>% 
+  group_by(member_casual, day_of_week) %>% 
+  summarise(mean = round(seconds_to_period(
+    mean(ride_length, na.rm = TRUE)), digits = 2),
+    min = seconds_to_period(min(ride_length, na.rm = TRUE)),
+    max = seconds_to_period(max(ride_length, na.rm = TRUE))
+    )
+
+table_length3_mc_day
+```
+
+* Member and Casual by Month Table
+```{r}
+table_length4_mc_month <- data4_filtered_2length %>% 
+  group_by(member_casual, month_number) %>% 
+  summarise(mean = round(seconds_to_period(
+    mean(ride_length, na.rm = TRUE)), digits = 2),
+    min = seconds_to_period(min(ride_length, na.rm = TRUE)),
+    max = seconds_to_period(max(ride_length, na.rm = TRUE))
+    )
+
+table_length4_mc_month
+```
+
+* Member and Casual by Ride Type Table
+```{r}
+table_length5_mc_ride <- data4_filtered_2length %>% 
+  group_by(member_casual, rideable_type) %>% 
+  summarise(mean = round(seconds_to_period(
+    mean(ride_length, na.rm = TRUE)), digits = 2),
+    min = seconds_to_period(min(ride_length, na.rm = TRUE)),
+    max = seconds_to_period(max(ride_length, na.rm = TRUE))
+    )
+
+table_length5_mc_ride
+```
+
+With all this tables, we can have some idea about the database. But, in the next step we will be able to clearly understand what is going on.
+
+
+# 6 - Share
+* Supporting visualizations and key findings
+
+Now it's time to create some data viz to support the analysis. To carry out this step, the tables that have been created will be used and one more study will be added, the map study. So it will look like this:
+
+* Count Study
+Tables and plot by **RStudio**;
+
+* Ride Length Study
+Tables and plot by **RStudio**; and
+
+* Map Study
+Tables and plot by **Power BI** and **Tableau**.
+
+## 6.1 - Count Study
+
+Now we will see how members and casuals are different about the frequency of rides.
+
+### 6.1.1 - Member and Casual Viz
+
+* Bar
+```{r}
+ggplot(data=table_count1_mc,
+       aes(x = member_casual, y = count, fill = member_casual)) +
+  geom_bar(stat="identity", width = 0.7) +
+  labs(title="Casual and Member",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Counts") +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0), legend.position="none",
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+As we can see, most of the rides data are from annual members, but it's not so different.
+
+* Donuts
+```{r}
+donuts <- data.frame(table_count1_mc$member_casual, 
+                     table_count1_mc$count)
+
+donuts$fraction <- donuts$table_count1_mc.count / sum(donuts$table_count1_mc.count)
+donuts$ymax <- cumsum(donuts$fraction)
+donuts$ymin <- c(0, head(donuts$ymax, n = -1))
+donuts$labelposition <- (donuts$ymax + donuts$ymin) / 2
+donuts$label <- paste0(donuts$table_count1_mc.member_casual,
+                       "\n value: ", 
+                       round(donuts$fraction*100, digits = 2))
+
+ggplot(donuts, aes(ymax=ymax, ymin=ymin, 
+                   xmax=4, xmin=3, 
+                   fill = table_count1_mc.member_casual )) +
+  geom_rect() +
+  geom_label(x = 3.5, aes(y = labelposition, label = label), size = 4.5) +
+  coord_polar(theta="y") +
+  xlim(c(2, 4)) +
+  theme_void() +
+  labs(title="Casual and Member",
+       caption = "Data from jan/20 to oct/21") +
+  theme(plot.title = element_text(hjust=0.5), legend.position="none",
+        panel.background = element_rect(fill = "gray88", color = "white"))
+```
+
+Now we have the proportion. 
+
+### 6.1.2 - Hour Viz
+```{r}
+ggplot(data=table_count2_mc_hour,
+       aes(x = hour, y = count, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Hour",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Counts") +
+  geom_text(aes(label=count), vjust=1.6, color="white",
+            position = position_dodge(0.9), size=2,) +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 45),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+Members and Casuals are different when the variable is the hour to ride. While Members ride mostly at 7am to 7pm, a few Casuals ride at the morning. At night there is more Casuals than Member riding (as we see before, there is more Annual Members than Casuals Riders).
+
+### 6.1.3 - Day Viz
+
+* Bar
+```{r}
+ggplot(data=table_count3_mc_day,
+       aes(x = day_of_week, y = count, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Week Day",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Counts") +
+  geom_text(aes(label=count), vjust=1.6, color="white",
+            position = position_dodge(0.9), size=2,) +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+```{r}
+ggplot(table_count3_mc_day, 
+       aes(day_of_week, member_casual, fill = count)) + 
+  geom_tile(color = "black",
+            lwd = 1,
+            linetype = 1) +
+  scale_fill_gradient2(low = "white",
+                       mid = "white",
+                       high = "red") +
+  labs(title="Casual and Member by Week Day",
+       caption = "Data from jan/20 to oct/21",
+       x = "Week Day",
+       y = "") +
+  geom_text(aes(label=count), vjust=1.6, color="white",
+            position = position_dodge(0.9), size=2,) +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0),
+        panel.background = element_rect(fill = "gray88"),
+        legend.position = "none")
+```
+
+Here is a big difference: Casuals ride much more on Sundays (the first bar) and Saturdays (the last bar), while Members ride constantly in week days. 
+
+### 6.1.4 - Month Viz
+```{r}
+table_count4_mc_month$month_number <- month.abb[table_count4_mc_month$month_number]
+
+ggplot(data=table_count4_mc_month,
+       aes(x = factor(month_number, 
+                      levels = c("Jan", "Feb", "Mar", 
+                                 "Apr", "May", "Jun",
+                                 "Jul", "Aug", "Sep",
+                                 "Oct", "Nov", "Dec")), 
+           y = count, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Month",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Counts") +
+  geom_text(aes(label=count), vjust=1.6, color="white",
+            position = position_dodge(0.9), size=2,) +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 45),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+Both ride more at the summer and less at the winter.
+
+
+### 6.1.5 - Rideable Bike Type Viz
+```{r}
+ggplot(data=table_count5_mc_ride,
+       aes(x = rideable_type, y = count, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Bike Type",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Counts") +
+  geom_text(aes(label=count), vjust=1.6, color="white",
+            position = position_dodge(0.9), size=2,) +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+Members use much more the classic bike than the docked bike if we compare with Casuals
+
+## 6.2 - Ride Length Study
+
+At this point, we will analyse how members and casuals are different about the ride length in minutes. 
+
+### 6.2.1 - Member and Casual Viz
+
+Bar
+```{r}
+ggplot(data=table_length1_mc,
+       aes(x = member_casual, 
+           y = as.numeric(mean)/60, 
+           fill = member_casual)) +
+  geom_bar(stat="identity", width = 0.7) +
+  labs(title="Casual and Member",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Ride Length Minutes") +
+  geom_text(aes(label=mean), vjust=1.6, color="white",
+            position = position_dodge(0.9), size=2,) +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0), legend.position="none",
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+Casuals users spend twice time more than Members pedaling.
+
+
+### 6.2.2 - Hour Viz
+```{r}
+ggplot(data=table_length2_mc_hour,
+       aes(x = hour, y = as.numeric(mean)/60, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Hour",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Ride Length Minutes") +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 45),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+The length of the rides of members are smaller and more constantly than casuals.
+
+### 6.2.3 - Day Viz
+```{r}
+ggplot(data=table_length3_mc_day,
+       aes(x = day_of_week, y = as.numeric(mean)/60, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Week Day",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Ride Length Minutes") +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+At Sundays and Saturdays Casuals spend more time riding
+
+### 6.2.4 - Month Viz
+```{r}
+table_length4_mc_month$month_number <- month.abb[table_length4_mc_month$month_number]
+
+ggplot(data=table_length4_mc_month,
+       aes(x = factor(month_number, 
+                      levels = c("Jan", "Feb", "Mar", 
+                                 "Apr", "May", "Jun",
+                                 "Jul", "Aug", "Sep",
+                                 "Oct", "Nov", "Dec")), 
+           y = as.numeric(mean)/60, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Month",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Ride Length Minutes") +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 45),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+Independent of the month, Members's ride length are similar
+
+### 6.2.5 - Rideable Bike Type Viz
+```{r}
+ggplot(data=table_length5_mc_ride,
+       aes(x = rideable_type, 
+           y = as.numeric(mean)/60, fill = member_casual)) +
+  facet_grid(~member_casual) +
+  geom_bar(stat="identity",
+           position="dodge") +
+  labs(title="Casual and Member by Bike Type",
+       caption = "Data from jan/20 to oct/21",
+       x = "",
+       y = "Ride Length Minutes") +
+  theme(plot.title = element_text(hjust=0.5), 
+        axis.text.x = element_text(angle = 0),
+        panel.background = element_rect(fill = "gray88")) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+Casuals spends more time for the docked bike type
+
+## 6.3 - Map Study (Power BI)
+
+For this visualizations to be possible, since the database has almost 700 stations, it was necessary to applied a filter that shows only stations that registered at least 1000 observations of "start" at the study period (1 year). To ensure the credibility, a test was made and the vast majority of observations are still present.
+
+92.84% from the total of the observations are included when applied the filter
+```{r}
+table_stations <- data3_cleaned %>% 
+  group_by(member_casual, start_station_id) %>% 
+  summarise(count = n())
+
+table_stations_filtered_1000 <- filter(table_stations, 
+                                       count > 1000)
+round(sum(table_stations_filtered_1000$count) / sum(table_stations$count), digits = 4) * 100
+
+```
+
+### 6.3.1 - Stations where Members and Casuals most unlock bikes
+![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i14_map.png)
+
+Casuals are mostly on the waterfront, while the Members are mostly in the city center.
+
+### 6.3.2 - Member Overview
+![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i15_map_dash_member.png)
+### 6.3.3 - Casuals Overview
+![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i16_map_dash_casual.png)
+
+### Additional dinamic visualization (Tableau Public)
+
+As it is not possible to publish through Power BI without a subscription, I created a dashboard through Tableau. With that it will be possible to filter the data and specific insights. To access, click on the following link:
+
+<https://public.tableau.com/app/profile/thiago.pasolini/viz/Cyclistic_16392298883560/member_casual>
+
+## 6.4 - Key Findings
+
+**Trends and relationships**
+
+### Both
+* Ride more at the summer and less at the winter
+
+### Casuals
+* Just few Casuals ride at morning
+* Although Members majority, at night Casuals are majority
+* Ride much more on Sundays and Saturdays
+* Independent of the day of week, time, month or bike type, Casuals spend twice time riding if compared with Members
+* Rides depart mostly on the waterfront
+
+### Members
+* Members ride at work time, at 7am to 7pm
+* Members are constantly in week day
+* Members use much more the classic bike than the docked bike (16x) when compared with Casuals (3.5x)
+* Rides depart mostly in the city center
+
+**Speculations**
+
+Based on the information above, with just one relevant finding to both and many differences to each one, we presume that, **they intent to use is for distinct reasons**. And these reasons we make the assumption that can be: 
+
+* **Casuals primarily use Cyclistic bikes for leisure**; and
+* **Members primarily use Cyclistic bikes for commuting to work or another routines**.
+
+
+# 7 - Act
+
+## 7.1 - Recommendation I - Convert assertively
+
+**To design an annual plan for weekend users**
+
+It's not possible to design a new marketing strategy that converts all the Casuals to Members and get satisfactory results, because as we saw before, they have different reasons to ride. To make it clearer, here is an example about a Casual rider: 
+
+Maria has a car, works from Monday to Friday, lives with her husband and their two children. She always rides on Saturdays morning, she just wants to have a moment to combine fun with healthy at weekends. She has no interested in paying for an annual bike plan that enable her to use every day, there's no sense for her and for the mostly of the users like her (Casuals).
+
+So, the solution is to create a plan to these specific riders. According to the records of the database, they represent almost 20% from the total.
+
+Something we need to be careful about is the current Members. But, the risk of losing them to this campaign is very low due to the fact that we demonstrate earlier, that most Members ride on weekdays, for work and other routines.
+
+**To be assertive in the marketing strategy**
+
+How can we convert Casuals to Member if they apparently don't want this commitment? 
+Highlighting:
+
+* the mental health benefits of having leisure time, at least weekly;
+* the health benefits of keep moving, riding constantly; and
+* the real discounts, in a transparent and easy to understand way.
+
+Who uses sporadically on Sundays or Saturdays can now, by being Member, the opportunity to use every Sundays and Saturdays, for the same price.
+
+In few words, the campaign theme can be: more leisure, more healthier and more savings for Casuals riders.
+
+**To establish a good trade between cost and benefit**
+
+With this action, a good part of Casuals riders will be more loyal and this means lower investment in marketing and more profit. But, this have to be not just more economic than the other annual plan, but a win-win relationship with the client and must be clear to the client's understanding. 
+
+**To hit the target**
+
+Just a good strategy is not enough, you have to hit the target. I was looking for some inspiration on google maps, and well, we know that we want the Casuals rider. So, based on the information that we have, these kind of marketing action may work: 
+
+Traditional Publicity: 
+
+* Outdoors and Displays along the Chicago waterfront;
+* Distribution of leaflets on weekends near Chicago bike stations;
+* Create partnerships with commerce along the maritime coast, like earn discount by being a Member; and
+* Install campaign display on bicycles
+
+Digital Publicity
+
+* With an mobile app (suggested later, at the Recommendation III), notify Casuals about the campaign; and
+* On social medias like (Instagram and Twitter), filtering by Chicago, at Weekends, through Digital Influencers focused in healthy habits and sports.
+
+**To keep up a great job of bicycle logistics**
+
+After implanted this plan, maybe some dock station will be busier and another less busy. It's important to track closely, in order to avoid bicycle leftovers and shortages.
+
+## 7.2 - Recommendation II - Data-driven decision making culture
+
+**Know more to improve loyalty**
+
+If the company wants more loyalty from the clients, more data about they will be necessary. Knowing consumer's age, genre, where they lives and the main reasons to ride enables the company to create marketing actions more accurate and create products more adapted to customers needs and consequently more connection, more empathy and a longer relationship.
+
+**To increase engagement through the app**
+
+A good and practice way to get data is through the company's app. Incentives to keep them moving, such as a monthly goal would be an excellent strategy.
+
+## 7.3 - Recommendation III - Increase Loyalty
+
+**To create a loyalty plan for Members**
+
+In addition to making even more loyal those who are already a Member, this will encourage Casuals to be a Member. Examples:
+
+Discipline points
+
+* At 3 months using every week earns 20 Ciclystic Points;
+* At 6 months using every week earns 40 Ciclystic Points; 
+
+Distance covered points
+
+* At five hundred covered miles earns 40 Ciclystic Points; 
+* At thousand covered miles earns 80 Ciclystic Points;
+
+Friends indication points
+
+* At three Indication for any annual plan earns 160 Ciclystic Points (after payment confirmation);
+* At six Indication for any annual plan earns 200 Ciclystic Points (after payment confirmation);
+
+Awards personalized by Ciclystic:
+
+* A Towel for            20 Ciclystic Points;  
+* A T shirt for          40 Ciclystic Points;
+* A Cap for              80 Ciclystic Points;
+* A Thermos bottle for  150 Ciclystic Points; and
+* A Bicycle helmet for  200 Ciclystic Points.
+
+**To create a discount system for annual plan renewal**
+
+For those who are already a member and wants to renewal the annual plan, regardless if the plan is to every day or just on weekends, concede (just for an example) 5% off.

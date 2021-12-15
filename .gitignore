@@ -1,0 +1,11 @@
+
+.RData
+.Rhistory
+*.Rproj
+*.RData
+*.csv
+maps/202011-divvy-tripdata+.hyper
+maps/Cyclistic.twb
+maps/map_cyclistic.pbix
+maps/~map__22004.twbr
+.Rproj.user
