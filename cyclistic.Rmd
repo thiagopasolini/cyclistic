@@ -811,37 +811,37 @@ As it is not possible to publish through Power BI without a subscription, I crea
 
 ## 6.4 - Key Findings
 
-**Trends and relationships**
+### 6.4.1 Differences and Similarities
 
-### Both
-* Ride more at the summer and less at the winter
+**Members**
+* Most ride at work time, at 7am to 7pm
+* They use constantly on weekdays
+* Use much more the classic bike than the docked bike (16x) when compared with Casuals (3.5x)
 
-### Casuals
+**Casuals**
 * Just few Casuals ride at morning
 * Although Members majority, at night Casuals are majority
 * Ride much more on Sundays and Saturdays
 * Independent of the day of week, time, month or bike type, Casuals spend twice time riding if compared with Members
 * Rides depart mostly on the waterfront
 
-### Members
-* Members ride at work time, at 7am to 7pm
-* Members are constantly in week day
-* Members use much more the classic bike than the docked bike (16x) when compared with Casuals (3.5x)
+**Both**
+* Ride more at the summer and less at the winter
 * Rides depart mostly in the city center
 
-**Speculations**
+### 6.4.2 Speculations
 
-Based on the information above, with just one relevant finding to both and many differences to each one, we presume that, **they intent to use is for distinct reasons**. And these reasons we make the assumption that can be: 
+Based on the information above, with just one relevant finding to both and many differences to each one, we presume that, **they intent to use is for distinct reasons**. And these reasons we make the following assumptions: 
 
-* **Casuals primarily use Cyclistic bikes for leisure**; and
-* **Members primarily use Cyclistic bikes for commuting to work or another routines**.
+* **Casuals** primarily use Cyclistic bikes for **leisure**; and
+* **Members** primarily use Cyclistic bikes for commuting to **work** or other **routines**.
 
 
 # 7 - Act
 
-## 7.1 - Recommendation I - Convert assertively
+## 7.1 - Recommendation I - Convert Casuals to Member assertively
 
-**To design an annual plan for weekend users**
+**Design an annual plan for weekend users**
 
 It's not possible to design a new marketing strategy that converts all the Casuals to Members and get satisfactory results, because as we saw before, they have different reasons to ride. To make it clearer, here is an example about a Casual rider: 
 
@@ -851,7 +851,7 @@ So, the solution is to create a plan to these specific riders. According to the 
 
 Something we need to be careful about is the current Members. But, the risk of losing them to this campaign is very low due to the fact that we demonstrate earlier, that most Members ride on weekdays, for work and other routines.
 
-**To be assertive in the marketing strategy**
+**Be assertive in the marketing strategy**
 
 How can we convert Casuals to Member if they apparently don't want this commitment? 
 Highlighting:
@@ -864,11 +864,11 @@ Who uses sporadically on Sundays or Saturdays can now, by being Member, the oppo
 
 In few words, the campaign theme can be: more leisure, more healthier and more savings for Casuals riders.
 
-**To establish a good trade between cost and benefit**
+**Establish a good trade between cost and benefit**
 
-With this action, a good part of Casuals riders will be more loyal and this means lower investment in marketing and more profit. But, this have to be not just more economic than the other annual plan, but a win-win relationship with the client and must be clear to the client's understanding. 
+With this action, a good part of Casuals riders will be more loyal and this means lower investment in marketing and more profit. But, this have to be not just more economic than the other annual plan, but a win-win relationship and must be clear to the client's understanding. 
 
-**To hit the target**
+**Hit the target**
 
 Just a good strategy is not enough, you have to hit the target. I was looking for some inspiration on google maps, and well, we know that we want the Casuals rider. So, based on the information that we have, these kind of marketing action may work: 
 
@@ -876,7 +876,7 @@ Traditional Publicity:
 
 * Outdoors and Displays along the Chicago waterfront;
 * Distribution of leaflets on weekends near Chicago bike stations;
-* Create partnerships with commerce along the maritime coast, like earn discount by being a Member; and
+* Create partnerships with food and beverage commerce along the maritime coast, like earn discount by being a Member ; and
 * Install campaign display on bicycles
 
 Digital Publicity
@@ -884,40 +884,40 @@ Digital Publicity
 * With an mobile app (suggested later, at the Recommendation III), notify Casuals about the campaign; and
 * On social medias like (Instagram and Twitter), filtering by Chicago, at Weekends, through Digital Influencers focused in healthy habits and sports.
 
-**To keep up a great job of bicycle logistics**
+**Keep up a great job of bicycle logistics**
 
 After implanted this plan, maybe some dock station will be busier and another less busy. It's important to track closely, in order to avoid bicycle leftovers and shortages.
 
-## 7.2 - Recommendation II - Data-driven decision making culture
+## 7.2 - Recommendation II - Create data-driven decision making culture
 
-**Know more to improve loyalty**
+**Know more to be more engaged and with a better reputation**
 
 If the company wants more loyalty from the clients, more data about they will be necessary. Knowing consumer's age, genre, where they lives and the main reasons to ride enables the company to create marketing actions more accurate and create products more adapted to customers needs and consequently more connection, more empathy and a longer relationship.
 
-**To increase engagement through the app**
+**Make the relationship stronger closer through the app**
 
-A good and practice way to get data is through the company's app. Incentives to keep them moving, such as a monthly goal would be an excellent strategy.
+A good and practice way to get consumer data is through the company's app. Create incentives to keep them moving, such as a monthly goal would be an excellent strategy for them to constantly use the app.
 
-## 7.3 - Recommendation III - Increase Loyalty
+## 7.3 - Recommendation III - Increase Consumer Loyalty
 
-**To create a loyalty plan for Members**
+**Create a loyalty plan for Members**
 
 In addition to making even more loyal those who are already a Member, this will encourage Casuals to be a Member. Examples:
 
-Discipline points
+Disciplined use points
 
-* At 3 months using every week earns 20 Ciclystic Points;
-* At 6 months using every week earns 40 Ciclystic Points; 
+* At 3 months using every week, earns 20 Ciclystic Points;
+* At 6 months using every week, earns 40 Ciclystic Points; 
 
 Distance covered points
 
-* At five hundred covered miles earns 40 Ciclystic Points; 
-* At thousand covered miles earns 80 Ciclystic Points;
+* At 500 covered miles earns, 40 Ciclystic Points; 
+* At 1000 covered miles earns, 80 Ciclystic Points;
 
 Friends indication points
 
-* At three Indication for any annual plan earns 160 Ciclystic Points (after payment confirmation);
-* At six Indication for any annual plan earns 200 Ciclystic Points (after payment confirmation);
+* At the third indication for any annual plan, earns 160 Ciclystic Points (after payment confirmation);
+* At the sixth indication for any annual plan, earns 200 Ciclystic Points (after payment confirmation);
 
 Awards personalized by Ciclystic:
 
@@ -927,6 +927,6 @@ Awards personalized by Ciclystic:
 * A Thermos bottle for  150 Ciclystic Points; and
 * A Bicycle helmet for  200 Ciclystic Points.
 
-**To create a discount system for annual plan renewal**
+**Create a discount system for annual plan renewal**
 
 For those who are already a member and wants to renewal the annual plan, regardless if the plan is to every day or just on weekends, concede (just for an example) 5% off.
