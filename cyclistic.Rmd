@@ -196,6 +196,12 @@ save(data1_merged, file = "data/processed/data1_merged.RData")
 
 ## 4.3 - Pre-exploring and discovering percentile of missing values
 
+Number of rows, number of column and structure
+```{r}
+glimpse(data1_merged)
+```
+
+
 ```{r}
 glimpse(data1_merged)
 ```
