@@ -61,28 +61,33 @@ Moreno has set a clear goal: **Design marketing strategies aimed at converting c
 * why casual riders would buy a membership; and 
 * how digital media could affect their marketing tactics. 
 
-# Scope of work
+### Scope of work
 
-### 1 - Ask
+**1 - Ask**
 A clear statement of the business task
 
-### 2 - Prepare
+**2 - Prepare**
 A description of all data sources used
 
-### 3 - Process
+**3 - Process**
 Documentation of any cleaning or manipulation of data
 
-### 4 - Analyze
+**4 - Analyze**
 A summary of your analysis
 
-### 5 - Share
+**5 - Share**
 Supporting visualizations and key findings
 
-### 6 - Act
+**6 - Act**
 Top three recommendations based on the analysis
 
-To see the complete project, please, access:
+# Links to the project
+
+To access the **complete project**, please, access:
 <https://github.com/thiagopasolini/cyclistic/blob/main/cyclistic.Rmd>
 
-To see extra visuals, please, click on the link below:
+If you want to see the **presentations**, please, acess:
+<https://github.com/thiagopasolini/cyclistic/tree/main/presentation>
+
+And, if you want to check extra **dinamic visuals**, please, click on the link below:
 <https://public.tableau.com/app/profile/thiago.pasolini/viz/Cyclistic_16392298883560/member_casual>
