@@ -11,15 +11,15 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 1 - Introduction
+# 0 - Introduction
 
 This is a Capstone Project for the Google Data Analytics Professional Certification.
 
-### 1.1 - The Scenario
+### 0.1 - The Scenario
 
 I'm a junior data analyst, working in the marketing analytics team at Cyclistic, a *fictional* bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. My task for this project is to understand **how casual riders and annual members use Cyclistic bikes differently** and **design a new marketing strategy to convert casual riders into annual members**. But before that, executives must approve the recommendations, with well structured and compelling data insights and visualizations.
 
-### 1.2 - The Company
+### 0.2 - The Company
 
 ![](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i01_logo.png)
 
@@ -66,7 +66,7 @@ Cyclistic sets itself apart by also offering reclining bikes, hand tricycles, an
 * Pricing flexibility; and
 * Adaptive tools to people with disabilities and riders who can’t use a standard two-wheeled bike.
 
-### 1.3 - The Problem
+### 0.3 - The Problem
 
 Cyclistic’s finance analysts have concluded that **annual members are much more profitable than casual riders**. Although the **pricing flexibility helps Cyclistic attract more customers**, Moreno believes that maximizing the number of annual members will be key to future growth.
 
@@ -76,34 +76,34 @@ Moreno has set a clear goal: **Design marketing strategies aimed at converting c
 * why casual riders would buy a membership; and 
 * how digital media could affect their marketing tactics. 
 
-# 1.4 - Scope of work
+# 0.4 - Scope of work
 
-### 2 - Ask
+### 1 - Ask
 A clear statement of the business task
 
-### 3 - Prepare
+### 2 - Prepare
 A description of all data sources used
 
-### 4 - Process
+### 3 - Process
 Documentation of any cleaning or manipulation of data
 
-### 5 - Analyze
+### 4 - Analyze
 A summary of your analysis
 
-### 6 - Share
+### 5 - Share
 Supporting visualizations and key findings
 
-### 7 - Act
+### 6 - Act
 Top three recommendations based on the analysis
 
 
-# 2 - Ask
+# 1 - Ask
 * A clear statement of the business task
 
 Me and my team will use the six steps of the analysis process (Ask, Prepare, Process, Analyze, Share and Act) to analyze the twelve previous months of Cyclistic historical bike trip data and guide my analysis of the databases to answer the three questions related in "The Problem" above. After that, we will be able to know if the goal of the director of marketing is tangible and (if it is) how is the best way to accomplish that, with recommendations based on the study findings and present to the executive team.
 
 
-# 3 - Prepare
+# 2 - Prepare
 * A description of all data sources used
 
 The data are stored at <https://divvy-tripdata.s3.amazonaws.com/index.html> and organized by month. Since there is no filter, or previous calculating in the raw data and all the consumer are included, we concluded that there is no issues with bias or credibility in the data. To ensure that, we used the ROCCC system:
@@ -133,12 +133,12 @@ C - Cited:
 The data is sourced by a first-party group (Motivate International Inc.), under this license <https://www.divvybikes.com/data-license-agreement>.
 
 
-# 4 - Process
+# 3 - Process
 * Documentation of any cleaning or manipulation of data
 
 All this step will be completed in RStudio, this tool is powerful for handling large amounts of data. To maintain the data integrity all the data will be merged and loaded.
 
-## 4.1 - Loading packages
+## 3.1 - Loading packages
 
 ```{r include=FALSE}
 library(readr)
@@ -146,7 +146,7 @@ library(tidyverse)
 library(lubridate)
 ```
 
-## 4.2 - Merging the database
+## 3.2 - Merging the database
 
 ```{r}
 raw_data_2020_11 <- read_csv("data/raw/202011-divvy-tripdata.csv")
@@ -194,7 +194,7 @@ rm(list = c("raw_data_2020_11",
 save(data1_merged, file = "data/processed/data1_merged.RData")
 ```
 
-## 4.3 - Pre-exploring and discovering percentile of missing values
+## 3.3 - Pre-exploring and discovering percentile of missing values
 
 Number of rows, number of column and structure
 ```{r}
@@ -214,9 +214,9 @@ round(sum(is.na(data1_merged)) /
 
 **NAs** variables percentile from total **3.58%**. It's smaller than 10% of adopted for the statistical significance level.
 
-## 4.4 - Adapting database for study
+## 3.4 - Adapting database for study
 
-### 4.4.1 - Filtering not relevant variables
+### 3.4.1 - Filtering not relevant variables
 
 Variable "ride_id" it's not relevant for the study.
 ```{r}
@@ -243,7 +243,7 @@ data2_adapted <- select(data2_adapted,
                        - end_lng)
 ```
 
-### 4.4.2 - Adding relevant variables 
+### 3.4.2 - Adding relevant variables 
 
 According to the project's tasks
 ```{r}
@@ -263,7 +263,7 @@ hour <- hour(data2_adapted$started_at)
 month_number <- month(data2_adapted$started_at)
 ```
 
-### 4.4.3 - Combining everything
+### 3.4.3 - Combining everything
 ```{r}
 data2_adapted <- mutate(data2_adapted,
                        ride_length,
@@ -274,7 +274,7 @@ data2_adapted <- mutate(data2_adapted,
 
 ```
 
-### 4.4.4 - Checking out and removing used data
+### 3.4.4 - Checking out and removing used data
 ```{r}
 rm(list = c("ride_length",
             "day_of_week",
@@ -285,9 +285,9 @@ rm(list = c("ride_length",
 glimpse(data2_adapted)
 ```
 
-## 4.4.5 - Cleaning
+## 3.4.5 - Cleaning
 
-## 4.4.5.1 - Identifying problems
+## 3.4.5.1 - Identifying problems
 ```{r}
 summary(data2_adapted)
 ```
@@ -297,7 +297,7 @@ min(data2_adapted$ride_length, na.rm = T)
 
 The variable ride length must be bigger than zero.
 
-## 4.4.5.2 - Investigating the percentile from total
+## 3.4.5.2 - Investigating the percentile from total
 ```{r}
 round(nrow(filter(data2_adapted, 
        ride_length <= 0)
@@ -305,14 +305,14 @@ round(nrow(filter(data2_adapted,
 ```
 Just 3% of the total observations from "ride_lenght" aren't bigger than zero
 
-## 4.4.5.3 - Fixing
+## 3.4.5.3 - Fixing
 ```{r}
 data3_cleaned <- mutate(data2_adapted,
                        ride_length = replace(
                          ride_length, ride_length <= 0, NA))
 ```
 
-## 4.4.5.4 - Checking out the results and the NAs percentile
+## 3.4.5.4 - Checking out the results and the NAs percentile
 ```{r}
 min(data3_cleaned$ride_length, na.rm = T)
 ```
@@ -323,22 +323,22 @@ round(sum(is.na(data3_cleaned)) /
 ```
 2.32% of the total observations are now missing values
 
-## 4.4.5.5 - Saving the process
+## 3.4.5.5 - Saving the process
 ```{r}
 save(data3_cleaned, file = "data/processed/data2_cleaned.RData")
 ```
 
 
-# 5 - Analyze
+# 4 - Analyze
 * A summary of your analysis
 
 This step will be splitted into two studies:
 * Count Study; and
 * Ride Length Study.
 
-## 5.1 Count Study
+## 4.1 Count Study
 
-### 5.1.1 Using only variables to this study
+### 4.1.1 Using only variables to this study
 ```{r}
 data4_filtered_1count <- select(data3_cleaned,
                                rideable_type, 
@@ -354,7 +354,7 @@ Checking out
 head(data4_filtered_1count)
 ```
 
-### 5.1.2 Exploring data by tables
+### 4.1.2 Exploring data by tables
 
 * Member and Casual Table
 ```{r}
@@ -402,9 +402,9 @@ table_count5_mc_ride <- data4_filtered_1count %>%
 table_count5_mc_ride
 ```
 
-## 5.2 Ride Length Study
+## 4.2 Ride Length Study
 
-### 5.2.1 Using only variables to this study
+### 4.2.1 Using only variables to this study
 ```{r}
 data4_filtered_2length <- select(data3_cleaned,
                                 rideable_type, 
@@ -421,7 +421,7 @@ Checking out
 head(data4_filtered_2length)
 ```
 
-### 5.2.2 Exploring data by tables
+### 4.2.2 Exploring data by tables
 
 * Member and Casual Table
 ```{r}
@@ -491,7 +491,7 @@ table_length5_mc_ride
 With all this tables, we can have some idea about the database. But, in the next step we will be able to clearly understand what is going on.
 
 
-# 6 - Share
+# 5 - Share
 * Supporting visualizations and key findings
 
 Now it's time to create some data viz to support the analysis. To carry out this step, the tables that have been created will be used and one more study will be added, the map study. So it will look like this:
@@ -505,11 +505,11 @@ Tables and plot by **RStudio**; and
 * Map Study
 Tables and plot by **Power BI** and **Tableau**.
 
-## 6.1 - Count Study
+## 5.1 - Count Study
 
 Now we will see how members and casuals are different about the frequency of rides.
 
-### 6.1.1 - Member and Casual Viz
+### 5.1.1 - Member and Casual Viz
 
 * Bar
 ```{r}
@@ -557,7 +557,7 @@ ggplot(donuts, aes(ymax=ymax, ymin=ymin,
 
 Now we have the proportion. 
 
-### 6.1.2 - Hour Viz
+### 5.1.2 - Hour Viz
 ```{r}
 ggplot(data=table_count2_mc_hour,
        aes(x = hour, y = count, fill = member_casual)) +
@@ -578,7 +578,7 @@ ggplot(data=table_count2_mc_hour,
 
 Members and Casuals are different when the variable is the hour to ride. While Members ride mostly at 7am to 7pm, a few Casuals ride at the morning. At night there is more Casuals than Member riding (as we see before, there is more Annual Members than Casuals Riders).
 
-### 6.1.3 - Day Viz
+### 5.1.3 - Day Viz
 
 * Bar
 ```{r}
@@ -621,7 +621,7 @@ ggplot(table_count3_mc_day,
 
 Here is a big difference: Casuals ride much more on Sundays (the first bar) and Saturdays (the last bar), while Members ride constantly in week days. 
 
-### 6.1.4 - Month Viz
+### 5.1.4 - Month Viz
 ```{r}
 table_count4_mc_month$month_number <- month.abb[table_count4_mc_month$month_number]
 
@@ -650,7 +650,7 @@ ggplot(data=table_count4_mc_month,
 Both ride more at the summer and less at the winter.
 
 
-### 6.1.5 - Rideable Bike Type Viz
+### 5.1.5 - Rideable Bike Type Viz
 ```{r}
 ggplot(data=table_count5_mc_ride,
        aes(x = rideable_type, y = count, fill = member_casual)) +
@@ -671,11 +671,11 @@ ggplot(data=table_count5_mc_ride,
 
 Members use much more the classic bike than the docked bike if we compare with Casuals
 
-## 6.2 - Ride Length Study
+## 5.2 - Ride Length Study
 
 At this point, we will analyse how members and casuals are different about the ride length in minutes. 
 
-### 6.2.1 - Member and Casual Viz
+### 5.2.1 - Member and Casual Viz
 
 Bar
 ```{r}
@@ -699,7 +699,7 @@ ggplot(data=table_length1_mc,
 Casuals users spend twice time more than Members pedaling.
 
 
-### 6.2.2 - Hour Viz
+### 5.2.2 - Hour Viz
 ```{r}
 ggplot(data=table_length2_mc_hour,
        aes(x = hour, y = as.numeric(mean)/60, fill = member_casual)) +
@@ -718,7 +718,7 @@ ggplot(data=table_length2_mc_hour,
 
 The length of the rides of members are smaller and more constantly than casuals.
 
-### 6.2.3 - Day Viz
+### 5.2.3 - Day Viz
 ```{r}
 ggplot(data=table_length3_mc_day,
        aes(x = day_of_week, y = as.numeric(mean)/60, fill = member_casual)) +
@@ -737,7 +737,7 @@ ggplot(data=table_length3_mc_day,
 
 At Sundays and Saturdays Casuals spend more time riding
 
-### 6.2.4 - Month Viz
+### 5.2.4 - Month Viz
 ```{r}
 table_length4_mc_month$month_number <- month.abb[table_length4_mc_month$month_number]
 
@@ -763,7 +763,7 @@ ggplot(data=table_length4_mc_month,
 
 Independent of the month, Members's ride length are similar
 
-### 6.2.5 - Rideable Bike Type Viz
+### 5.2.5 - Rideable Bike Type Viz
 ```{r}
 ggplot(data=table_length5_mc_ride,
        aes(x = rideable_type, 
@@ -783,7 +783,7 @@ ggplot(data=table_length5_mc_ride,
 
 Casuals spends more time for the docked bike type
 
-## 6.3 - Map Study (Power BI)
+## 5.3 - Map Study (Power BI)
 
 For this visualizations to be possible, since the database has almost 700 stations, it was necessary to applied a filter that shows only stations that registered at least 1000 observations of "start" at the study period (1 year). To ensure the credibility, a test was made and the vast majority of observations are still present.
 
@@ -799,14 +799,14 @@ round(sum(table_stations_filtered_1000$count) / sum(table_stations$count), digit
 
 ```
 
-### 6.3.1 - Stations where Members and Casuals most unlock bikes
+### 5.3.1 - Stations where Members and Casuals most unlock bikes
 ![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i14_map.png)
 
 Casuals are mostly on the waterfront, while the Members are mostly in the city center.
 
-### 6.3.2 - Member Overview
+### 5.3.2 - Member Overview
 ![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i15_map_dash_member.png)
-### 6.3.3 - Casuals Overview
+### 5.3.3 - Casuals Overview
 ![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i16_map_dash_casual.png)
 
 ### Additional dinamic visualization (Tableau Public)
@@ -815,9 +815,9 @@ As it is not possible to publish through Power BI without a subscription, I crea
 
 <https://public.tableau.com/app/profile/thiago.pasolini/viz/Cyclistic_16392298883560/member_casual>
 
-## 6.4 - Key Findings
+## 5.4 - Key Findings
 
-### 6.4.1 Differences and Similarities
+### 5.4.1 Differences and Similarities
 
 **Members**
 * Most ride at work time, at 7am to 7pm
@@ -835,7 +835,7 @@ As it is not possible to publish through Power BI without a subscription, I crea
 * Ride more at the summer and less at the winter
 * Rides depart mostly in the city center
 
-### 6.4.2 Speculations
+### 5.4.2 Speculations
 
 Based on the information above, with just one relevant finding to both and many differences to each one, we presume that, **they intent to use is for distinct reasons**. And these reasons we make the following assumptions: 
 
@@ -843,9 +843,9 @@ Based on the information above, with just one relevant finding to both and many 
 * **Members** primarily use Cyclistic bikes for commuting to **work** or other **routines**.
 
 
-# 7 - Act
+# 6 - Act
 
-## 7.1 - Recommendation I - Convert Casuals to Member assertively
+## 6.1 - Recommendation I - Convert Casuals to Member assertively
 
 **Design an annual plan for weekend users**
 
@@ -894,7 +894,7 @@ Digital Publicity
 
 After implanted this plan, maybe some dock station will be busier and another less busy. It's important to track closely, in order to avoid bicycle leftovers and shortages.
 
-## 7.2 - Recommendation II - Create data-driven decision making culture
+## 6.2 - Recommendation II - Create data-driven decision making culture
 
 **Know more to be more engaged and with a better reputation**
 
@@ -904,7 +904,7 @@ If the company wants more loyalty from the clients, more data about they will be
 
 A good and practice way to get consumer data is through the company's app. Create incentives to keep them moving, such as a monthly goal would be an excellent strategy for them to constantly use the app.
 
-## 7.3 - Recommendation III - Increase Consumer Loyalty
+## 6.3 - Recommendation III - Increase Consumer Loyalty
 
 **Create a loyalty plan for Members**
 
