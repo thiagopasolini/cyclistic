@@ -72,9 +72,8 @@ Cyclistic’s finance analysts have concluded that **annual members are much mor
 
 Moreno has set a clear goal: **Design marketing strategies aimed at converting casual riders into annual members**. In order to do that, however, the marketing analyst team needs to better understand:
 
-* how annual members and casual riders differ; 
-* why casual riders would buy a membership; and 
-* how digital media could affect their marketing tactics. 
+* How casual riders and annual members use Cyclistic bikes differently? 
+* Which marketing strategy would be most effective in converting casual users into members?
 
 # 0.4 - Scope of work
 
@@ -100,7 +99,17 @@ Top three recommendations based on the analysis
 # 1 - Ask
 * A clear statement of the business task
 
-Me and my team will use the six steps of the analysis process (Ask, Prepare, Process, Analyze, Share and Act) to analyze the twelve previous months of Cyclistic historical bike trip data and guide my analysis of the databases to answer the three questions related in "The Problem" above. After that, we will be able to know if the goal of the director of marketing is tangible and (if it is) how is the best way to accomplish that, with recommendations based on the study findings and present to the executive team.
+Me and my team will use the six steps of the analysis process (Ask, Prepare, Process, Analyze, Share and Act) to analyze the twelve previous months of Cyclistic historical bike trip data and guide my analysis of the databases to answer the three questions related in "The Problem" above. 
+
+To solve that, we will ask the follwing questions:
+
+**How annual members and casual riders differ?**
+**What are the intended use of members and casuals?**
+**Why casual riders would buy a membership?**
+**Could traditional marketing work for casual users?**
+**How to use digital media efficiently for casual users?**
+
+After that, we will be able to know if the goal of the director of marketing is tangible and (if it is) how is the best way to accomplish that, with recommendations based on the study findings and present to the executive team.
 
 
 # 2 - Prepare
@@ -809,7 +818,7 @@ Casuals are mostly on the waterfront, while the Members are mostly in the city c
 ### 5.3.3 - Casuals Overview
 ![Image through Power BI](C:/data_science/Portfolio/Case_Study_1_Bike_Share/cyclistic/images/i16_map_dash_casual.png)
 
-### Additional dinamic visualization (Tableau Public)
+### Additional dynamic visualization (Tableau Public)
 
 As it is not possible to publish through Power BI without a subscription, I created a dashboard through Tableau. With that it will be possible to filter the data and specific insights. To access, click on the following link:
 
