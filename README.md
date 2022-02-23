@@ -4,7 +4,7 @@ This is a Capstone Project for the Google Data Analytics Professional Certificat
 
 ### The Scenario
 
-I'm a junior data analyst, working in the marketing analytics team at Cyclistic, a *fictional* bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. My task for this project is to understand **how casual riders and annual members use Cyclistic bikes differently** and **design a new marketing strategy to convert casual riders into annual members**. But before that, executives must approve the recommendations, with well structured and compelling data insights and visualizations.
+I'm a data analyst, working in the marketing analytics team at Cyclistic, a *fictional* bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. My task for this project is to understand **how casual riders and annual members use Cyclistic bikes differently** and **design a new marketing strategy to convert casual riders into annual members**. But before that, executives must approve the recommendations, with well structured and compelling data insights and visualizations.
 
 ### The Company
 
